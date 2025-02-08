@@ -9,7 +9,7 @@ const LovePuzzle = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (code === '1558') {
+    if (code === 'amour' || code === 'AMOUR') {
       setMessage('Congratulations! You have solved the key to our hearts! 💕');
       setShowSuccess(true);
     } else {
@@ -39,7 +39,7 @@ const LovePuzzle = () => {
                   onChange={(e) => setCode(e.target.value)}
                   placeholder="Enter the key to my heart..."
                   className="w-full px-4 py-2 bg-white/20 border border-pink-300/50 rounded-lg text-pink-100 placeholder-pink-300/70 focus:outline-none focus:ring-2 focus:ring-pink-400"
-                  maxLength={4}
+                  maxLength={10}
               />
             </div>
 
