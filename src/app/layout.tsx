@@ -10,11 +10,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+                                     children,
+                                   }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
-      <body>{children}</body>
-    </html>
+      <html lang="en" className={`${GeistSans.variable}`}>
+      <body suppressHydrationWarning={true}>
+      {children}
+      </body>
+      </html>
   );
 }
