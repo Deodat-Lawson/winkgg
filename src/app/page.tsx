@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React, { useState } from "react";
 import { Gift, Heart, Sparkles, Stars } from "lucide-react";
 
 type FloatingHeartProps = {
@@ -41,17 +41,15 @@ const detailCards = [
 ];
 
 const benefits = [
-  "Unlimited hugs & competitive cuddle package",
+  "All the money I make",
   "Guaranteed boyfriend loyalty and weekly date nights",
   "Random forehead kisses (no cap) and PTO: Please Touch Often",
   "Scientifically proven health boost: more serotonin, less stress",
   "Snack delivery on demand & 24/7 emotional support with zero downtime",
-  "Long-term growth opportunities: more love, more memories, maybe a shared mortgage",
 ];
 
 const responsibilities = [
-  "Brightening my days simply by existing",
-  "Stealing my hoodies and wearing them better than I ever could",
+  "Brightening my days simply by existing and being the best girlfriend I could ever ask for",
   "Making me grin at random because I remembered something adorable",
   "Going on adventures, both epic and everyday",
   "Letting me hype you up nonstop and being breathtaking without trying",
@@ -62,13 +60,25 @@ const requirements = [
   "Elite-tier beauty and a 10/10 face card that never declines",
   "God-level emotional intelligence and S-tier girlfriend energy",
   "Excellent communication, especially when you're teasing me",
-  "A heart so warm it should be nationally protected",
+  "A heart so warm it should be protected for the rest of my life",
 ];
 
 const ValentinePage = () => {
+  const [accepted, setAccepted] = useState(false);
+  const [showHearts, setShowHearts] = useState(false);
+
+  const handleAccept = () => {
+    setAccepted(true);
+    setShowHearts(true);
+    
+    // Reset hearts animation after a delay
+    setTimeout(() => {
+      setShowHearts(false);
+    }, 3000);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-red-100 flex flex-col items-center overflow-hidden text-gray-800">
-      {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         {Array.from({ length: 20 }).map((_, i) => (
           <FloatingHeart
@@ -93,7 +103,7 @@ const ValentinePage = () => {
             <Gift className="text-red-500 animate-spin" size={40} />
             <div className="relative">
               <h1 className="text-4xl sm:text-5xl font-bold text-red-600 animate-pulse">
-                Dear [Her Name],
+                Dear Nora (Siyu) Zhang,
               </h1>
               <Stars className="absolute -top-6 -right-6 text-yellow-400 animate-spin" size={24} />
               <Stars className="absolute -bottom-6 -left-6 text-yellow-400 animate-spin" size={24} />
@@ -106,8 +116,7 @@ const ValentinePage = () => {
             for the highly competitive, full-time role of <span className="font-semibold text-red-500">Best Woman & Girlfriend</span>.
           </p>
           <p className="max-w-3xl text-lg leading-relaxed">
-            Following final-round evaluations (which you passed with flying colors, charm, and an unfairly cute smile), it is my
-            great joy to formally extend the following offer:
+            Following final-round evaluations, it is my great joy to formally extend the following offer:
           </p>
         </div>
 
@@ -163,18 +172,66 @@ const ValentinePage = () => {
           </div>
         </section>
 
-        <section className="mt-12 bg-gradient-to-r from-pink-100 to-red-100 rounded-3xl border border-red-200 p-8 text-center shadow-inner">
+        <section className="mt-12 bg-gradient-to-r from-pink-100 to-red-100 rounded-3xl border border-red-200 p-8 text-center shadow-inner relative overflow-hidden">
           <h3 className="text-3xl font-bold text-red-600">✨ Acceptance</h3>
-          <p className="mt-4 text-lg">
-            To accept this offer, simply reply with:
-            <span className="block mt-2 font-semibold text-2xl text-red-500">
-              “Yes, I accept being your Best Girlfriend and the love of your life.”
-            </span>
-            (Or just kiss me, which also counts legally.)
-          </p>
-          <button className="mt-6 inline-flex items-center gap-2 px-8 py-3 rounded-full bg-red-500 text-white font-semibold shadow-lg hover:bg-red-600 transition">
-            <Heart className="text-white" fill="currentColor" size={20} /> Accept with a Kiss
-          </button>
+          {!accepted ? (
+            <>
+              <p className="mt-4 text-lg">
+                To accept this offer, simply reply with:
+                <span className="block mt-2 font-semibold text-2xl text-red-500">
+                  "Yes, I accept being your Best Girlfriend and the love of your life."
+                </span>
+                (Or just kiss me, which also counts legally.)
+              </p>
+              <button 
+                onClick={handleAccept}
+                className="mt-6 inline-flex items-center gap-2 px-8 py-3 rounded-full bg-red-500 text-white font-semibold shadow-lg hover:bg-red-600 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer transform"
+              >
+                <Heart className="text-white animate-pulse" fill="currentColor" size={20} /> Accept with a Kiss
+              </button>
+            </>
+          ) : (
+            <div className="mt-6 space-y-4 animate-fade-in">
+              <div className="flex items-center justify-center gap-2">
+                <Heart className="text-red-500 animate-bounce" fill="red" size={32} />
+                <h4 className="text-3xl font-bold text-red-600">YES! 💕</h4>
+                <Heart className="text-red-500 animate-bounce" fill="red" size={32} />
+              </div>
+              <p className="text-xl font-semibold text-red-500">
+                Offer Accepted! 🎉
+              </p>
+              <p className="text-lg text-gray-700">
+                You've officially accepted the role of Best Girlfriend and Love of My Life!
+              </p>
+              <p className="text-lg text-pink-600 font-medium">
+                Can't wait to celebrate with you! 💖
+              </p>
+            </div>
+          )}
+          
+          {/* Animated hearts on click */}
+          {showHearts && (
+            <div className="absolute inset-0 pointer-events-none">
+              {Array.from({ length: 30 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute animate-heart-float"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    bottom: '-10%',
+                    animationDelay: `${Math.random() * 2}s`,
+                    animationDuration: `${2 + Math.random() * 2}s`,
+                  }}
+                >
+                  <Heart 
+                    className="text-red-500 opacity-80" 
+                    fill="red" 
+                    size={20 + Math.random() * 20} 
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </section>
 
         <section className="mt-12 text-center text-lg leading-relaxed bg-white/70 rounded-3xl p-8 border border-pink-100 shadow">
